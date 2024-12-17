@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import AddTask from './components/AddTask';
 import TasksList from './components/TasksList';
+import TaskContext from './context/TaskContext';
 
 function App() {
   const [task, setTask] = useState('');
@@ -20,8 +21,10 @@ function App() {
 
   return (
     <div className='container'>
-      <AddTask task={task} handleChange={handleChange} handleSubmit={handleSubmit}/>
-      <TasksList tasks={tasks}/>
+      <TaskContext.Provider value={tasks}>
+        <AddTask task={task} handleChange={handleChange} handleSubmit={handleSubmit}/>
+        <TasksList />
+      </TaskContext.Provider>
     </div>
   )
 }

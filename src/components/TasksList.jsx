@@ -1,20 +1,18 @@
-import React from 'react'
-import TaskItem from './TaskItem'
-import { useContext } from 'react'
-import TaskContext from '../context/TaskContext'
+import { useContext } from "react";
+import TaskItem from "./TaskItem";
+import TaskContext from "../context/TaskContext";
 
 function TasksList() {
-  const tasks = useContext(TaskContext)
+  const { getTasks } = useContext(TaskContext);
+  const tasks = getTasks();
   return (
     <>
-      <h3 className='tasks-title'>Tasks to do - {tasks.length}</h3>
-      {
-        tasks.map(function(item, index) {
-          return <TaskItem item={item} key={index}/>
-        })
-      }
+      <h3 className="tasks-title">Tasks to do - {tasks.length}</h3>
+      {tasks.map(function (item) {
+        return <TaskItem item={item} key={item.id} />;
+      })}
     </>
-  )
+  );
 }
 
-export default TasksList
+export default TasksList;

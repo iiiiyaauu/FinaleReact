@@ -1,5 +1,5 @@
 import React from "react";
-import PlusIcon from '../icons/Plus.svg';
+import PlusIcon from "../icons/Plus.svg";
 
 function AddTask(props) {
   return (

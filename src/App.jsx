@@ -1,32 +1,31 @@
-import { useState } from 'react';
-import './App.css';
-import AddTask from './components/AddTask';
-import TasksList from './components/TasksList';
-import TaskContext from './context/TaskContext';
+import { useState, useContext } from "react";
+import AddTask from "./components/AddTask";
+import TasksList from "./components/TasksList";
+import TaskContext from "./context/TaskContext";
+import "./App.css";
 
 function App() {
-  const [task, setTask] = useState('');
-  const [tasks, setTasks] = useState([]);
-
+  const { addTask, getTasks } = useContext(TaskContext);
+  const [task, setTask] = useState("");
   function handleChange(event) {
     setTask(event.target.value);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    setTasks(function(prev) {
-      return [...prev, task];
-    })
+    addTask({ id: Math.random(), body: task });
   }
 
   return (
-    <div className='container'>
-      <TaskContext.Provider value={tasks}>
-        <AddTask task={task} handleChange={handleChange} handleSubmit={handleSubmit}/>
-        <TasksList />
-      </TaskContext.Provider>
+    <div className="container">
+      <AddTask
+        task={task}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
+      <TasksList />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
